@@ -25,10 +25,16 @@
  * Atmel Software Framework (ASF).
  */
 #include <asf.h>
+#include <avr/io.h>
 
-int main (void)
-{
-	board_init();
-
-	// Insert application code here, after the board has been initialized.
+int main(void) {
+	long i;
+	DDRB = 1<< DDB5; // PB5/D13 is an output
+	while(1) {
+		PORTB = 1<< PORTB5; // LED is on – alternativa: PORTB = 0x20;
+		for(i = 0; i < 100000; i++); // delay
+		PORTB = 0<< PORTB5; // LED is off – alternativa: PORTB = 0x00;
+		for(i = 0; i < 100000; i++); // delay
+	}
 }
+
